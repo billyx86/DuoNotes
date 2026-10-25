@@ -15,8 +15,7 @@ struct ContentView: View {
         if sizeClass == .compact {
             CardListView()
         } else {
-            Text("Notes")
-                .font(.largeTitle)
+            NotesView()
         }
     }
 }

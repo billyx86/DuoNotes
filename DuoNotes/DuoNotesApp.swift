@@ -14,6 +14,6 @@ struct DuoNotesApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Flashcard.self)
+        .modelContainer(for: [Flashcard.self, Note.self])
     }
 }
