@@ -13,9 +13,11 @@ final class Note {
     var title: String = ""
     var body: String = ""
     var createdAt: Date = Date.now
+    @Attribute(.externalStorage) var drawingData: Data?
     
-    init(title: String = "", body: String = "") {
+    init(title: String = "", body: String = "", drawingData: Data? = nil) {
         self.title = title
         self.body = body
+        self.drawingData = drawingData
     }
 }

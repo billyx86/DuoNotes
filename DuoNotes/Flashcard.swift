@@ -14,10 +14,12 @@ final class Flashcard {
     var back: String
     var createdAt: Date
     var isKnown: Bool = false
+    @Attribute(.externalStorage) var drawingData: Data?
     
-    init(front: String, back: String) {
+    init(front: String, back: String, drawingData: Data? = nil) {
         self.front = front
         self.back = back
         self.createdAt = .now
+        self.drawingData = drawingData
     }
 }
