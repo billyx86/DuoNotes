@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if sizeClass == .compact {
+            Text("Flashcards")
+                .font(.largeTitle)
+        } else {
+            Text("Notes")
+                .font(.largeTitle)
         }
-        .padding()
     }
 }
 
