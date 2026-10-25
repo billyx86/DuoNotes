@@ -13,6 +13,7 @@ final class Flashcard {
     var front: String
     var back: String
     var createdAt: Date
+    var isKnown: Bool = false
     
     init(front: String, back: String) {
         self.front = front

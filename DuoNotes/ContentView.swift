@@ -24,6 +24,7 @@ struct ContentView: View {
 struct CardListView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Flashcard.createdAt) private var cards: [Flashcard]
+    @State private var isReviewing = false
     
     var body: some View {
         NavigationStack {
@@ -37,6 +38,12 @@ struct CardListView: View {
             .toolbar {
                 Button("Add", systemImage: "plus") {
                     context.insert(Flashcard(front: "Question \(cards.count + 1)", back: "Answer"))
+                }
+                Button("Review", systemImage: "rectangle.on.rectangle.angled") {
+                    isReviewing = true
+                }
+                .navigationDestination(isPresented: $isReviewing) {
+                    ReviewView(cards: cards)
                 }
             }
         }
