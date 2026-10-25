@@ -25,6 +25,7 @@ struct CardListView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Flashcard.createdAt) private var cards: [Flashcard]
     @State private var isReviewing = false
+    @State private var editingCard: Flashcard?
     
     var body: some View {
         NavigationStack {
@@ -33,17 +34,24 @@ struct CardListView: View {
                     Text(card.front).bold()
                     Text(card.back).foregroundStyle(.secondary)
                 }
+                .contentShape(.rect)
+                .onTapGesture { editingCard = card }
             }
             .navigationTitle("Cards (\(cards.count))")
             .toolbar {
                 Button("Add", systemImage: "plus") {
-                    context.insert(Flashcard(front: "Question \(cards.count + 1)", back: "Answer"))
+                    let card = Flashcard(front: "", back: "")
+                    context.insert(card)
+                    editingCard = card
                 }
                 Button("Review", systemImage: "rectangle.on.rectangle.angled") {
                     isReviewing = true
                 }
                 .navigationDestination(isPresented: $isReviewing) {
                     ReviewView(cards: cards)
+                }
+                .sheet(item: $editingCard) { card in
+                    CardEditorView(card: card)
                 }
             }
         }
